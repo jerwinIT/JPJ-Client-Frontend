@@ -16,11 +16,13 @@ import Account from './pages/Account'
 //INVMS
 import AddProduct from './invms/AddProduct'
 import GetProduct from './invms/GetProduct'
-import RemoveProduct from './invms/RemoveProduct'
 import SearchProduct from './invms/SearchProduct'
 import SellProduct from './invms/SellProduct'
 import UpdatePrice from './invms/UpdatePrice'
 import UpdateStock from './invms/UpdateStock'
+import DailyRecord from './invms/DailyRecord'
+import MonthlyRecord from './invms/MonthlyRecord'
+
 
   
 
@@ -51,13 +53,16 @@ const BrowserRoutes = () => {
           <Route path='/delete-account' element={<DeleteAccount/>} />
           <Route path='/add-product' element={<AddProduct />} />
           <Route path='/get-product' element={<GetProduct />} />
-          <Route path='/remove-product' element={<RemoveProduct />} />
           <Route path='/search-product' element={<SearchProduct />} />
           <Route path='/sell-product' element={<SellProduct />} />
           <Route path='/update-price' element={<UpdatePrice />} />
           <Route path='/update-stock' element={<UpdateStock />} />
           <Route path='/get-cred' element={<Account/>} />
           <Route path='/register' element={<Register />} />
+          <Route path='/daily-record' element ={<DailyRecord/>}/>
+          <Route path='/monthly-record' element ={<MonthlyRecord/>}/>
+       
+
         </Route>
 
         <Route element={<RestrictedRoutes />}>

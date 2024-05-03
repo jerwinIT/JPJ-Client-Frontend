@@ -74,7 +74,7 @@ const SearchProduct = () => {
                                 <th>Reorder Point</th>
                                 <th>Ceiling Level</th>
                                 <th>Floor Level</th>
-                                <th>Actions</th>
+                             
                             </tr>
                         </thead>
                         <tbody>

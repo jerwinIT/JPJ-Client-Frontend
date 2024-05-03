@@ -43,7 +43,7 @@ const AddProduct = () => {
             setSuccess('');
         }
     };
-//clearing
+    //clearing
     const handleReload = () => {
         setSuccess(""); 
         setError(""); 

@@ -33,10 +33,10 @@ const Inventory = () => {
     const onChange = (e) => {
         setSearchInput(e.target.value);
     };
-
+    
     const onSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
             const response = await searchProduct({ item_name: searchInput });
             setSearchResult(response.data.products);
@@ -48,22 +48,26 @@ const Inventory = () => {
     };
 
     const handleRemove = async (itemNumber) => {
-        try {
-            const { data } = await removeProduct(itemNumber);
-
-            if (data.success) {
-                setSuccess(data.message);
-                setError('');
-                setProducts(prevProducts => prevProducts.filter(product => product.item_number !== itemNumber));
-                setSearchResult(prevSearchResult => prevSearchResult.filter(product => product.item_number !== itemNumber));
-            } else {
-                setError(data.error);
+        const confirmation = window.confirm("Are you sure you want to remove this product?");
+        
+        if (confirmation) {
+            try {
+                const { data } = await removeProduct(itemNumber);
+    
+                if (data.success) {
+                    setSuccess(data.message);
+                    setError('');
+                    setProducts(prevProducts => prevProducts.filter(product => product.item_number !== itemNumber));
+                    setSearchResult(prevSearchResult => prevSearchResult.filter(product => product.item_number !== itemNumber));
+                } else {
+                    setError(data.error);
+                    setSuccess('');
+                }
+            } catch (error) {
+                console.error("Error removing product:", error);
+                setError("Product Not Found");
                 setSuccess('');
             }
-        } catch (error) {
-            console.error("Error removing product:", error);
-            setError("Product Not Found");
-            setSuccess('');
         }
     };
 

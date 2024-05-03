@@ -58,3 +58,36 @@ export async function DailySalesRecord(DailySalesRecord){
     )
 }
 
+export async function getDailySalesRecord(){
+    return await axios.get(
+        'http://localhost:8000/api/get-daily-record', 
+    )
+}
+
+
+export async function MonthlySalesRecord(MonthlySalesRecord){
+    return await axios.post(
+        'http://localhost:8000/api/monthly-record', MonthlySalesRecord
+    )
+}
+
+export async function getMonthlySalesRecord(){
+    return await axios.get(
+        'http://localhost:8000/api/get-monthly-record', 
+    )
+}
+
+export async function deleteDailySalesRecord(targetDate){
+    return await axios.delete(
+        'http://localhost:8000/api/remove-daily-sales', 
+        {data:{targetDate:targetDate}}
+    )
+}
+
+export async function deleteMonthlySalesRecord(startDate, endDate){
+    return await axios.delete(
+        'http://localhost:8000/api//remove-monthly-sales', 
+        { data: { startDate: startDate, endDate: endDate } }
+    )
+}
+

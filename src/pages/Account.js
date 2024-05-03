@@ -34,18 +34,24 @@ const Account = () => {
     };
 
     const handleDeleteAccount = async (username) => {
-        try {
-            await deleteAccount(username);
-            window.location.reload(); // Refresh the page after successful deletion
-        } catch (error) {
-            console.error("Error removing account:", error);
+        const confirmation = window.confirm(`Are you sure you want to delete the account for ${username}?`);
+        
+        if (confirmation) {
+            try {
+                await deleteAccount(username);
+                setCreds(prevCredentials => prevCredentials.filter(cred => cred.username !== username));
+            } catch (error) {
+                console.error("Error removing account:", error);
+            }
         }
     };
+    
+    
 
     return (
         <Layout>
             <div className="container mt-5">
-                <h1 className="text-center mb-4">Account Information</h1>
+                <h1 className="text-center mb-4">Account</h1>
                 <div className="mb-3">
                     <button
                         className="btn btn-primary mr-3"

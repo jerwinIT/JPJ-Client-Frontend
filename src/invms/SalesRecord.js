@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { saveAs } from "file-saver";
 import { InventorySalesRecord } from "../api/invms";
+import MonthlyRecord from "./MonthlyRecord";
+import DailyRecord from "./DailyRecord";
 
 const SalesRecord = () => {
     const [sales, setSales] = useState([]);
+    const [showDailySalesRecord, setShowDailySalesRecord] = useState(false);
+    const [showMonthlySalesRecord, setShowMonthlySalesRecord] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     useEffect(() => {
         fetchData();
@@ -24,10 +30,7 @@ const SalesRecord = () => {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
+        return date.toISOString().split('T')[0];
     };
 
     const downloadSalesData = () => {
@@ -41,7 +44,7 @@ const SalesRecord = () => {
     
         const salesCSV = [headers.join(",")];
     
-        sales.forEach((sale, index) => {
+        sales.forEach((sale) => {
             const row = [
                 sale.sale_id,
                 formatDate(sale.sale_date),
@@ -56,13 +59,23 @@ const SalesRecord = () => {
         saveAs(blob, "sales_record.csv");
     };
     
+    const toggleDailySalesRecord = () => {
+        setShowDailySalesRecord(!showDailySalesRecord);
+        setShowMonthlySalesRecord(false);
+    };
+
+    const toggleMonthlySalesRecord = () => {
+        setShowMonthlySalesRecord(!showMonthlySalesRecord);
+        setShowDailySalesRecord(false);
+    };
 
     return (
-        <div>
-            <h2 className="text-center mt-5">Sales Record</h2>
-            <div className="table-responsive" style={{ maxHeight: '300px', overflowY: 'auto' }}>
+        <div className="container mt-5">
+            <h2 className="text-center mb-4">Sales Record</h2>
+
+            <div className="table-responsive">
                 <table className="table mt-3 text-center">
-                    <thead>
+                    <thead className="thead-dark">
                         <tr>
                             <th>Sale ID</th>
                             <th>Date</th>
@@ -84,9 +97,15 @@ const SalesRecord = () => {
                     </tbody>
                 </table>
             </div>
-            <div className="text-center">
-                <button className="btn btn-primary mt-3" onClick={downloadSalesData}>Download Sales Record</button>
+
+            <div className="d-flex justify-content-center">
+                <button className="btn btn-primary mr-2" onClick={downloadSalesData}>Download Sales Record</button>
+                <button className="btn btn-info mr-2" onClick={toggleDailySalesRecord}>Daily Record</button>
+                <button className="btn btn-info" onClick={toggleMonthlySalesRecord}>Monthly Record</button>
             </div>
+
+            {showDailySalesRecord && <DailyRecord />}
+            {showMonthlySalesRecord && <MonthlyRecord />}
         </div>
     );
 };
