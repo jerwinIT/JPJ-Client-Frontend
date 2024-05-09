@@ -39,7 +39,7 @@ const Login = () => {
     <Layout>
       <div className="container mt-3">
         <div className="login-container"> 
-          <h1>LOGIN</h1> 
+          <h1>ADMIN</h1> 
           <form onSubmit={(e) => onSubmit(e)}>
             {/* Username field */}
             <div className='mb-3'>

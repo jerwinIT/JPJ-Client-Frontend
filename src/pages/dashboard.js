@@ -43,7 +43,7 @@ const Dashboard = () => {
   ) : (
     <div>
       <Layout>
-        <h1 className='text-center mt-5'>Dashboard</h1>
+        <h1 className='text-center mt-5'>WELCOME ADMIN!</h1>
         <h2>{protectedData}</h2>
 
         <button onClick={() => logout()} className='btn btn-primary'>

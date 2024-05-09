@@ -30,9 +30,9 @@ const SellProduct = () => {
                 stock_level: 0
             });
             fetchData();
-            window.location.reload();
+            
         } catch (error) {
-            setError("An error occurred while selling the product.");
+            setError("Transaction Error");
             setSuccess("");
         }
     };

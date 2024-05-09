@@ -47,7 +47,7 @@ function Navbar() {
             ) : (
                 <div className="navbar-links">
                     <NavLink to='/login'>
-                        <div>Login</div>
+                        <div>ADMIN</div>
                     </NavLink>
                     
                 </div>

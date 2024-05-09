@@ -8,8 +8,7 @@ const SalesRecord = () => {
     const [sales, setSales] = useState([]);
     const [showDailySalesRecord, setShowDailySalesRecord] = useState(false);
     const [showMonthlySalesRecord, setShowMonthlySalesRecord] = useState(false);
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+
 
     useEffect(() => {
         fetchData();
@@ -30,9 +29,9 @@ const SalesRecord = () => {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return date.toISOString().split('T')[0];
+        return date.toLocaleDateString('en-US');
     };
-
+    
     const downloadSalesData = () => {
         const headers = [
             "Sale ID",
@@ -77,7 +76,7 @@ const SalesRecord = () => {
                 <table className="table mt-3 text-center">
                     <thead className="thead-dark">
                         <tr>
-                            <th>Sale ID</th>
+                            
                             <th>Date</th>
                             <th>Item Name</th>
                             <th>Quantity</th>
@@ -87,7 +86,7 @@ const SalesRecord = () => {
                     <tbody>
                         {sales.map((sale, index) => (
                             <tr key={index}>
-                                <td>{sale.sale_id}</td>
+                                
                                 <td>{formatDate(sale.sale_date)}</td>
                                 <td>{sale.item_name}</td>
                                 <td>{sale.stock_level}</td>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { deleteAccount } from "../api/auth";
 
 const DeleteAccount = ({ username, onDeleteAccount }) => {
     const [error, setError] = useState('');
